@@ -1,0 +1,462 @@
+/*
+Theme Name: Personal Blog Theme
+Author: Safwan Rahimi
+Description: A simple WordPress theme for personal blogging with dark mode
+Version: 1.0
+*/
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: "Georgia", serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
+  padding-top: 80px; /* Tambah ruang untuk header floating */
+}
+
+.container {
+  width: 80%;
+  max-width: 800px;
+  margin: auto;
+  overflow: hidden;
+  flex: 1 0 auto;
+}
+
+header {
+  background: #fff;
+  color: #333;
+  padding: 1rem 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header nav {
+  flex-grow: 1;
+  text-align: center;
+}
+
+/* Dark Mode Switch Styles */
+.dark-mode-switch {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  margin-left: 20px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+  background-color: #222;
+  color: #f4f4f4;
+}
+
+body.dark-mode header,
+body.dark-mode .post {
+  background: #333;
+  color: #f4f4f4;
+}
+
+body.dark-mode header a {
+  color: #f4f4f4;
+}
+
+body.dark.mode .post-meta {
+  color: #aaa;
+}
+
+/* Remove the old dark mode toggle button styles */
+#dark-mode-toggle {
+  display: none;
+}
+
+.glass-header {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1200px;
+  z-index: 1000;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 5px 0;
+}
+
+.glass-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 20px;
+}
+
+.glass-header #branding h1 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.glass-header #branding h1 a {
+  color: #333;
+  text-decoration: none;
+}
+
+.glass-header nav {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.glass-header .nav-menu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.glass-header .nav-menu li {
+  margin: 0 10px;
+}
+
+.glass-header .nav-menu a {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.glass-header .nav-menu a:hover {
+  color: #007bff;
+}
+
+/* Dark mode styles for glass header */
+body.dark-mode .glass-header {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .glass-header #branding h1 a,
+body.dark-mode .glass-header .nav-menu a {
+  color: #f4f4f4;
+}
+
+body.dark.mode .glass-header .nav-menu a:hover {
+  color: #007bff;
+}
+
+.site-footer {
+  flex-shrink: 0;
+  background-color: #333;
+  color: #fff;
+  padding: 20px 0;
+  margin-top: auto;
+}
+
+.site-footer a {
+  color: #fff;
+}
+
+.site-footer .footer-menu {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+}
+
+.site-footer .footer-menu li {
+  display: inline;
+  margin-right: 15px;
+}
+
+/* Dark mode styles for footer */
+body.dark-mode .site-footer {
+  background-color: #222;
+  color: #f4f4f4;
+}
+
+body.dark-mode .site-footer a {
+  color: #f4f4f4;
+}
+
+/* Search Bar Styles */
+.search-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 40px auto 20px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.search-form {
+  display: flex;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 50px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-field {
+  flex-grow: 1;
+  border: none;
+  background: transparent;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #333;
+}
+
+.search-submit {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.search-submit:hover {
+  background: #0056b3;
+}
+
+/* Dark mode styles for search bar */
+body.dark-mode .search-form {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .search-field {
+  color: #f4f4f4;
+}
+
+body.dark-mode .search-field::placeholder {
+  color: #aaa;
+}
+
+/* Post Grid Styles */
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.post-card {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.post-thumbnail img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.post-content {
+  padding: 1.5rem;
+}
+
+.post-title {
+  font-size: 1.25rem;
+  margin: 0 0 0.5rem;
+}
+
+.post-title a {
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.post-title a:hover {
+  color: #007bff;
+}
+
+.post-meta {
+  font-size: 0.875rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.post-date,
+.post-author {
+  margin-right: 1rem;
+}
+
+.post-excerpt {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.read-more {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.read-more:hover {
+  background-color: #0056b3;
+}
+
+.pagination {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.pagination .page-numbers {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin: 0 0.25rem;
+  background-color: #f4f4f4;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.pagination .page-numbers.current {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.pagination .page-numbers:hover:not(.current) {
+  background-color: #e0e0e0;
+}
+
+/* Dark mode styles for post grid */
+body.dark-mode .post-card {
+  background: #333;
+}
+
+body.dark-mode .post-title a {
+  color: #f4f4f4;
+}
+
+body.dark-mode .post-meta {
+  color: #aaa;
+}
+
+body.dark-mode .pagination .page-numbers {
+  background-color: #444;
+  color: #f4f4f4;
+}
+
+body.dark-mode .pagination .page-numbers.current {
+  background-color: #007bff;
+}
+
+body.dark.mode .pagination .page-numbers:hover:not(.current) {
+  background-color: #555;
+}
+
+.social-icons {
+  display: flex;
+  align-items: center;
+}
+
+.social-icons a {
+  color: #333;
+  font-size: 1.2rem;
+  margin-left: 15px;
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #007bff;
+}
+
+/* Dark mode styles */
+body.dark-mode .glass-header {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .glass-header #branding h1 a,
+body.dark-mode .glass-header .nav-menu a,
+body.dark-mode .social-icons a {
+  color: #f4f4f4;
+}
+
+body.dark-mode .glass-header .nav-menu a:hover,
+body.dark-mode .social-icons a:hover {
+  color: #007bff;
+}
